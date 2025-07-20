@@ -23,10 +23,10 @@ class SQLAlchemyRepository(AbstractRepository):
             stmt = insert(self.model).values(**data).returning(self.model.id)
             res = await session.execute(stmt)
             await session.commit()
-            return res.scalar_one()
+        return res.scalar_one()
 
     async def get_all(self) -> List[dict]:
         async with async_session_maker() as session:
             stmt = select(self.model)
             res = await session.execute(stmt)
-            return res.scalars().all()
+        return res.scalars().all()
